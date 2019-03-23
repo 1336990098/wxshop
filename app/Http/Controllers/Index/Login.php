@@ -49,37 +49,36 @@ class Login extends Controller
     //注册执行
     public function registerdo(Request $request)
     {
-        $data=$request->all();
+        $tel = $request->tel;
+        $checktel = User::where('user_tel', $tel)->first();
+        if (!empty($checktel)) {
+            echo '2'; //存在
+            die;
+        } else {
+            $data = $request->all();
 //        print_R($data);die;
-        $pwd2=$data['pwd2'];
-        $user_pwd=$data['user_pwd'];
-        unset($data['_token']);
-        unset($data['pwd2']);
-        $data['user_pwd']=encrypt($data['user_pwd']);
-        $user_tel=$data['user_tel'];
-        //判断是否存在  唯一
-        $userInfo=User::where('user_tel',$user_tel)->first();
-//        print_r($userInfo);die;
-        if(empty($userInfo)){
-            $code=session('mobilecode');
+            $pwd2 = $data['pwd2'];
+            $user_pwd = $data['user_pwd'];
+            unset($data['_token']);
+            unset($data['pwd2']);
+            $data['user_pwd'] = encrypt($data['user_pwd']);
+            $code = session('mobilecode');
 
-            if($data['user_code']!=$code){
+            if ($data['user_code'] != $code) {
                 echo 4;//验证码错误
-            }else if($pwd2!=$user_pwd){
+            } else if ($pwd2 != $user_pwd) {
                 echo 5;//两次密码不对
-            }else{
+            } else {
 //                $res=LoginModel::insert($data);
                 $user_id = LoginModel::insertGetId($data);
 //                echo $res;die;
-                if(!empty($user_id)){
-                    session(['user'=>$user_id]);
+                if (!empty($user_id)) {
+                    session(['user' => $user_id]);
                     echo 1;//注册成功
-                }else{
+                } else {
                     echo 8;//注册失败
                 }
             }
-        }else{
-            echo 2;//已存在
         }
 
     }
@@ -107,34 +106,34 @@ class Login extends Controller
      * @params  $mobile  要发送的手机号
      *
      * */
-    private function sendMobile($mobile)
-    {
-        $host = env("MOBILE_HOST");
-        $path = env("MOBILE_PATH");
-        $method = "POST";
-        $appcode = env("MOBILE_APPCODE");
-        $headers = array();
-        $code = $this->createcode(4);
-        session(['mobilecode'=>$code]);
-        array_push($headers, "Authorization:APPCODE " . $appcode);
-        $querys = "content=【创信】你的验证码是："."$code"."，3分钟内有效！&mobile=".$mobile;
-        $bodys = "";
-        $url = $host . $path . "?" . $querys;
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_FAILONERROR, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HEADER, true);
-        if (1 == strpos("$".$host, "https://"))
-        {
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        }
-        return curl_exec($curl);
-    }
+//    private function sendMobile($mobile)
+//    {
+//        $host = env("MOBILE_HOST");
+//        $path = env("MOBILE_PATH");
+//        $method = "POST";
+//        $appcode = env("MOBILE_APPCODE");
+//        $headers = array();
+//        $code = $this->createcode(4);
+//        session(['mobilecode'=>$code]);
+//        array_push($headers, "Authorization:APPCODE " . $appcode);
+//        $querys = "content=【创信】你的验证码是："."$code"."，3分钟内有效！&mobile=".$mobile;
+//        $bodys = "";
+//        $url = $host . $path . "?" . $querys;
+//
+//        $curl = curl_init();
+//        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+//        curl_setopt($curl, CURLOPT_URL, $url);
+//        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($curl, CURLOPT_FAILONERROR, false);
+//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($curl, CURLOPT_HEADER, true);
+//        if (1 == strpos("$".$host, "https://"))
+//        {
+//            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+//        }
+//        return curl_exec($curl);
+//    }
 
 
 }

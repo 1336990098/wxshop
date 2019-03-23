@@ -67,6 +67,22 @@
                 }
             )
         });
+        $('#userMobile').blur(function(){
+            var user_tel=$(this).val();
+            // console.log(user_tel);
+            $.post(
+                "registerdo",
+                {tel:user_tel,_token:$('input[name=_token]').val()},
+                function(res){
+                    if(res==2){
+                        alert('手机号已存在');
+                        location.href = "{{url('login/register')}}";
+
+                    }
+                    // console.log(res);
+                }
+            )
+        });
         $('.registerCon input').bind('keydown',function(){
             var that = $(this);
             if(that.val().trim()!=""){
@@ -118,22 +134,22 @@
             // 手机号失去焦点
             $('#userMobile').blur(function(){
                 reg=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\d{8}$/;//验证手机正则(输入前7位至11位)
+                var falseflag;
                 var that = $(this);
-                var telflag=false;
                 if( that.val()==""|| that.val()=="请输入您的手机号")
                 {
                     layer.msg('请输入您的手机号！');
-                    return telflag;
+                    return falseflag=false;
                 }
                 else if(that.val().length<11)
                 {
                     layer.msg('您输入的手机号长度有误！');
-                    return telflag;
+                    return falseflag=false;
                 }
                 else if(!reg.test($("#userMobile").val()))
                 {
                     layer.msg('您输入的手机号不存在!');
-                    return telflag;
+                    return falseflag=false;
 
                 }
                 else if(that.val().length == 11){
@@ -211,7 +227,7 @@
                                 alert('注册失败');
                                 location.href = "{{url('login/register')}}";
                             }else if(res==2){
-                                alert('账号已存在');
+                                layer.msg('账号已存在');
                                 location.href = "{{url('login/register')}}";
                             }else if(res==4){
                                 alert('验证码错误');

@@ -5,7 +5,6 @@
 @section('content')
 	<div class="marginB" id="loadingPicBlock">
 		<!--首页头部-->
-		<h1>哈哈哈</h1>
 		<div class="m-block-header" style="display: none">
 			<div class="search"></div>
 			<a href="/" class="m-public-icon m-1yyg-icon"></a>
