@@ -12,7 +12,6 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link rel="stylesheet" href="{{url('layui/css/layui.css')}}">
-    <link rel="stylesheet" href="{{url('layui/css/layui.css')}}">
     <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{url('css/index.css')}}" rel="stylesheet" type="text/css" />
 </head>

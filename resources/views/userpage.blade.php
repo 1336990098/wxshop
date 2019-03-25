@@ -11,14 +11,21 @@
     <link href="css/comm.css" rel="stylesheet" type="text/css" /><link href="css/member.css" rel="stylesheet" type="text/css" /><script src="js/jquery190_1.js" language="javascript" type="text/javascript"></script>
 </head>
 <body class="g-acc-bg">
- {{--{{Session::get('user')}}--}}
+
+    @if("{{Session::get('user')}}"!='')
 
     <div class="welcome" style="display: none">
         <p>Hi，等你好久了！</p>
         <a href="{{url('login/login')}}" class="orange">登录</a>
         <a href="{{url('login/register')}}" class="orange">注册</a>
     </div>
-
+    @else
+        <div class="welcome" style="display: block">
+            <p>Hi，等你好久了！</p>
+            <a href="{{url('login/login')}}" class="orange">登录</a>
+            <a href="{{url('login/register')}}" class="orange">注册</a>
+        </div>
+        @endif
     <div class="welcome">
         <i class="set"></i>
         <div class="login-img clearfix">
@@ -64,10 +71,10 @@
     </div>
 <div class="footer clearfix">
     <ul>
-        <li class="f_home"><a href="{{url('/')}}" ><i></i>潮购</a></li>
-        <li class="f_announced"><a href="{{url('goods/goodslist')}}" ><i></i>最新揭晓</a></li>
-        <li class="f_single"><a href="/v44/post/index.do" ><i></i>晒单</a></li>
-        <li class="f_car"><a id="btnCart" href="{{url('cart/cartlist')}}" ><i></i>购物车</a></li>
+        <li class="f_home"><a href="{{url('/')}}" ><i></i>潮购</a></li> <!--class="hover"-->
+        <li class="f_announced"><a href="{{url('goods/goodslist')}}"><i></i>全部商品</a></li>
+        <li class="f_single"><a href="{{url('sharedetail')}}" ><i></i>晒单</a></li>
+        <li class="f_car"><a id="btnCart" href="{{url('cart/cartlist')}} "  ><i></i>购物车</a></li>
         <li class="f_personal"><a href="{{url('userpage')}}" class="hover"><i></i>我的潮购</a></li>
     </ul>
 </div>

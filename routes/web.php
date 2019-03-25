@@ -26,6 +26,8 @@ Route::prefix('cart')->group(function(){
     route::any('cartlist','Index\CartController@cartlist');
     route::any('cart','Index\CartController@cart');
     route::any('changeNum','Index\CartController@changeNum');
+    route::any('del','Index\CartController@del');
+    route::any('delall','Index\CartController@delall');
 });
 
 Route::prefix('login')->group(function(){
@@ -34,6 +36,13 @@ Route::prefix('login')->group(function(){
     route::any('register','Index\Login@register');
     route::any('registerdo','Index\Login@registerdo');
 });
+
+Route::prefix('order')->group(function(){
+    route::any('payment','Index\OrderController@payment');
+
+});
+
+
 route::any('verify/create','CaptchaController@create');
 route::any('verify/creates','CaptchaController@creates');
 route::any('sendcode','Index\Login@sendcode');

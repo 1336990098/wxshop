@@ -81,13 +81,13 @@
                     function(res){
                         // console.log(res)
                         if(res==0){
-                            alert('验证码填写错误');
+                            layer.msg('验证码填写错误')
 
                         }else if(res==1||res==2){
-                            alert('账号或密码错误');
+                            layer.msg('账号或密码错误');
 
                         }else{
-                            alert('登陆成功');
+                            layer.msg('登陆成功');
                             location.href = "{{url('/')}}";
                         }
                     }

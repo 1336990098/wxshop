@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Model\Index;
 class Common extends Controller
 {
     /**
@@ -32,18 +32,6 @@ class Common extends Controller
         }
         return $arr;
     }
+//
 
-    public function checkGoodsNum($goods_id,$num,$buy_number){
-        //根据id写条件
-        $where=[
-            'goods_id'=>$goods_id
-        ];
-        //查询
-        $goods_num=Index::where($where)->lists('goods_num');
-        //判断库存量是否在加入购物车的范围内
-        if(($num+$buy_number)>$goods_num){
-            $n=$goods_num-$num;
-            $this->fail('您购买数量已超过库存，您还可以购买'.$n.'件');
-        }
-    }
 }

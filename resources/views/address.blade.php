@@ -64,13 +64,9 @@
     </div>
    
 </div>
-
-
 <script src="js/zepto.js" charset="utf-8"></script>
 <script src="js/sm.js"></script>
 <script src="js/sm-extend.js"></script>
-
-
 <!-- 单选 -->
 <script>
     

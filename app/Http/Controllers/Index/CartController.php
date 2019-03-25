@@ -61,32 +61,62 @@ class CartController extends Common
         $cartInfo=Cart::where('user_id',$user_id)->get();
         $where=[
             'user_id'=>$user_id,
+            'cart_status'=>1,
         ];
         $goodsInfo=Cart::join('goods','cart.goods_id','=','goods.goods_id')->where($where)->get();
-//        print_r($goodsInfo);
+//        print_r($goodsInfo);die;
         return view('cart/cartlist',['cartInfo'=>$cartInfo,'goodsInfo'=>$goodsInfo]);
     }
 
     //改变购买数量
     public function changeNum(Request $request)
     {
-
         $goods_id=$request->goods_id;
         $buy_number=$request->buy_number;
-        $this->checkGoodsNum($goods_id,0,$buy_number);//检测库存
-        $cart_model=model('Cart');
         $cartWhere=[
-            'user_id'=>session('userInfo.user_id'),
+            'user_id'=>session('user'),
             'goods_id'=>$goods_id
         ];
+//        print_r($cartWhere);die;
         $cartDate=[
             'buy_number'=>$buy_number
         ];
-        $res=$cart_model->save($cartDate,$cartWhere);
+        $res=Cart::where($cartWhere)->update($cartDate);
         if($res){
-            successly('修改成功');
+            $this->successly('修改成功');
         }else{
-            fail('修改失败');
+            $this->fail('修改失败');
         }
+    }
+
+    //删除
+    public function del(Request $request)
+    {
+        $goods_id=$request->goods_id;
+        $where=[
+            'goods_id'=>$goods_id
+        ];
+        $res=Cart::where($where)->update(['cart_status'=>'2']);
+        if($res){
+            $this->successly('删除成功');
+        }else{
+            $this->fail('删除失败');
+        }
+
+    }
+
+    public function delall(Request $request)
+    {
+        $cart_id=$request->cart_id;
+        $cart_id=rtrim($cart_id,',');
+        $cart_id=explode(',',$cart_id);
+//        print_r($cart_id);die;
+        $res=Cart::whereIn('cart_id',$cart_id)->delete();
+        if($res){
+            $this->successly('删除成功');
+        }else{
+            $this->fail('删除失败');
+        }
+
     }
 }

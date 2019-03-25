@@ -1,6 +1,6 @@
 ﻿@extends('master')
 @section('title')
-	慕希
+	慕希啊
 @endsection
 @section('content')
 	<div class="marginB" id="loadingPicBlock">
