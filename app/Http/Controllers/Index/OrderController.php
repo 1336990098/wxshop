@@ -10,6 +10,7 @@ class OrderController extends Controller
     //
     public function payment()
     {
+
         return view('order/payment');
     }
 }

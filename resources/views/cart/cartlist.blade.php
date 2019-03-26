@@ -328,101 +328,11 @@
                     ,'json'
                 )
             })
+
+            //去结算
         })
     })
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {{--<script>--}}
-        {{--// 全选--}}
-        {{--$(".quanxuan").click(function () {--}}
-            {{--if($(this).hasClass('current')){--}}
-                {{--$(this).removeClass('current');--}}
-
-                {{--$(".g-Cart-list .xuan").each(function () {--}}
-                    {{--if ($(this).hasClass("current")) {--}}
-                        {{--$(this).removeClass("current");--}}
-                    {{--} else {--}}
-                        {{--$(this).addClass("current");--}}
-                    {{--}--}}
-                {{--});--}}
-                {{--GetCount();--}}
-            {{--}else{--}}
-                {{--$(this).addClass('current');--}}
-
-                {{--$(".g-Cart-list .xuan").each(function () {--}}
-                    {{--$(this).addClass("current");--}}
-                    {{--// $(this).next().css({ "background-color": "#3366cc", "color": "#ffffff" });--}}
-                {{--});--}}
-                {{--GetCount();--}}
-            {{--}--}}
-        {{--});--}}
-        {{--// 单选--}}
-        {{--$(".g-Cart-list .xuan").click(function () {--}}
-            {{--if($(this).hasClass('current')){--}}
-
-
-                {{--$(this).removeClass('current');--}}
-
-            {{--}else{--}}
-                {{--$(this).addClass('current');--}}
-            {{--}--}}
-            {{--if($('.g-Cart-list .xuan.current').length==$('#cartBody li').length){--}}
-                {{--$('.quanxuan').addClass('current');--}}
-
-            {{--}else{--}}
-                {{--$('.quanxuan').removeClass('current');--}}
-            {{--}--}}
-            {{--// $("#total2").html() = GetCount($(this));--}}
-            {{--GetCount();--}}
-            {{--//alert(conts);--}}
-        {{--});--}}
-        {{--// 已选中的总额--}}
-        {{--function GetCount() {--}}
-            {{--var conts = 0;--}}
-            {{--var aa = 0;--}}
-            {{--$(".g-Cart-list .xuan").each(function () {--}}
-                {{--if ($(this).hasClass("current")) {--}}
-                    {{--for (var i = 0; i < $(this).length; i++) {--}}
-                        {{--conts += parseInt($(this).parents('li').find('input.text_box').val());--}}
-                        {{--// aa += 1;--}}
-                    {{--}--}}
-                {{--}--}}
-            {{--});--}}
-
-            {{--$(".total").html('<span>￥</span>'+(conts).toFixed(2));--}}
-        {{--}--}}
-        {{--GetCount();--}}
-    {{--</script>--}}
 @endsection
 
 

@@ -83,6 +83,12 @@ class Login extends Controller
 
     }
 
+    //我的潮购
+    public function userpage()
+    {
+        return view('login/userpage');
+    }
+
     //传手机号
     public function sendcode(Request $request){
 //        echo 1;die;

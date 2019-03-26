@@ -8,24 +8,28 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
 
-    <link href="css/comm.css" rel="stylesheet" type="text/css" /><link href="css/member.css" rel="stylesheet" type="text/css" /><script src="js/jquery190_1.js" language="javascript" type="text/javascript"></script>
+    <link href="{{url('css/comm.css')}}" rel="stylesheet" type="text/css" /><link href="css/member.css" rel="stylesheet" type="text/css" /><script src="js/jquery190_1.js" language="javascript" type="text/javascript"></script>
 </head>
 <body class="g-acc-bg">
+{{--{{session('user')}}--}}
 
-    @if("{{Session::get('user')}}"!='')
-
-    <div class="welcome" style="display: none">
-        <p>Hi，等你好久了！</p>
-        <a href="{{url('login/login')}}" class="orange">登录</a>
-        <a href="{{url('login/register')}}" class="orange">注册</a>
-    </div>
-    @else
+    <?php if(session('user')==''){ ?>
         <div class="welcome" style="display: block">
             <p>Hi，等你好久了！</p>
             <a href="{{url('login/login')}}" class="orange">登录</a>
             <a href="{{url('login/register')}}" class="orange">注册</a>
         </div>
-        @endif
+    <?php }else{ ?>
+        <div class="welcome" style="display: none">
+            <p>Hi，等你好久了！</p>
+            <a href="{{url('login/login')}}" class="orange">登录</a>
+            <a href="{{url('login/register')}}" class="orange">注册</a>
+        </div>
+    <?php }?>
+
+
+
+
     <div class="welcome">
         <i class="set"></i>
         <div class="login-img clearfix">
@@ -79,14 +83,14 @@
     </ul>
 </div>
 
-    <script>
-        function goClick(obj, href) {
-            $(obj).empty();
-            location.href = href;
-        }
-        if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) != "micromessenger") {
-            $(".m-block-header").show();
-        }
-    </script>
+    {{--<script>--}}
+        {{--function goClick(obj, href) {--}}
+            {{--$(obj).empty();--}}
+            {{--location.href = href;--}}
+        {{--}--}}
+        {{--if (navigator.userAgent.toLowerCase().match(/MicroMessenger/i) != "micromessenger") {--}}
+            {{--$(".m-block-header").show();--}}
+        {{--}--}}
+    {{--</script>--}}
 </body>
 </html>
