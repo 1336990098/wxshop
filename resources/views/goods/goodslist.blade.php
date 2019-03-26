@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{url('css/mui.min_1.css')}}">
 <link href="{{url('css/goods.css')}}" rel="stylesheet" type="text/css" />
 
-
 <body class="g-acc-bg" fnav="0" style="position: static">
 <div class="page-group">
     <div id="page-infinite-scroll-bottom" class="page">

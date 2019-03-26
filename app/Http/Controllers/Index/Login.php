@@ -43,6 +43,7 @@ class Login extends Controller
     //注册
     public function register(Request $request)
     {
+        session(['mobilecode'=>1234]);
         return view('login/register');
     }
 
@@ -62,6 +63,7 @@ class Login extends Controller
             unset($data['_token']);
             unset($data['pwd2']);
             $data['user_pwd'] = encrypt($data['user_pwd']);
+
             $code = session('mobilecode');
 
             if ($data['user_code'] != $code) {
@@ -103,7 +105,6 @@ class Login extends Controller
         for($i=1;$i<=$len;$i++){
             $code .=mt_rand(0,9);
         }
-
         return $code;
     }
 

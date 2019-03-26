@@ -65,7 +65,11 @@ class CartController extends Common
         ];
         $goodsInfo=Cart::join('goods','cart.goods_id','=','goods.goods_id')->where($where)->get();
 //        print_r($goodsInfo);die;
-        return view('cart/cartlist',['cartInfo'=>$cartInfo,'goodsInfo'=>$goodsInfo]);
+        //最新商品
+        $goods_new=Index::all()->take(4);
+        // offset 设置从哪里开始，limit 设置想要查询多少条数据,skip 跳过几条，take取多少条数据
+        // $goods_new = Index::where([])->orderBy('create_time','desc')->offset(0)->take(4)->get();
+        return view('cart/cartlist',['cartInfo'=>$cartInfo,'goodsInfo'=>$goodsInfo,'goods_new'=>$goods_new]);
     }
 
     //改变购买数量
@@ -104,7 +108,7 @@ class CartController extends Common
         }
 
     }
-
+    //皮山
     public function delall(Request $request)
     {
         $cart_id=$request->cart_id;
@@ -117,6 +121,5 @@ class CartController extends Common
         }else{
             $this->fail('删除失败');
         }
-
     }
 }

@@ -17,7 +17,7 @@
         <div class="g-Cart-list">
             <ul id="cartBody">
                 @foreach($goodsInfo as $v)
-                <li cart_id="{{$v->cart_id}}" class="ll">
+                <li cart_id="{{$v->cart_id}}" goods_id="{{$v->goods_id}}" class="ll">
                     <s class="xuan current"></s>
                     <a class="fl u-Cart-img" href="javascript:;">
                         <img src="/goodsimg/{{$v['goods_img']}}" border="0" alt="">
@@ -49,7 +49,7 @@
                 </dt>
                 <dd>
                     <a href="javascript:;" id="a_payment" class="orangeBtn w_account remove">删除</a>
-                    <a href="{{url('order/payment')}}" id="a_payment" class="orangeBtn w_account">去结算</a>
+                    <a href="{{url('order/payment')}}" id="go_payment" class="orangeBtn w_account">去结算</a>{{----}}
                 </dd>
             </dl>
         </div>
@@ -60,14 +60,15 @@
             </div>
             <div class="goods-wrap thin-bor-top">
                 <ul class="goods-list clearfix">
+                    @foreach($goods_new as $v)
                     <li>
                         <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                            <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
+                            <img src="/goodsimg/{{$v->goods_img}}" width="136" height="136">
                         </a>
                         <p class="g-name">
-                            <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
+                            <a href="https://m.1yyg.com/v44/products/23458.do">{{$v->goods_name}}</a>
                         </p>
-                        <ins class="gray9">价值:￥7130</ins>
+                        <ins class="gray9">价值:￥{{$v->self_price}}</ins>
                         <div class="btn-wrap">
                             <div class="Progress-bar">
                                 <p class="u-progress">
@@ -81,69 +82,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <a href="" class="g-pic">
-                            <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                        </a>
-                        <p class="g-name">
-                            <a href="https://m.1yyg.com/v44/products/23458.do">(第368671潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                        </p>
-                        <ins class="gray9">价值:￥7130</ins>
-                        <div class="btn-wrap">
-                            <div class="Progress-bar">
-                                <p class="u-progress">
-                                    <span class="pgbar" style="width:45%;">
-                                        <span class="pging"></span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="gRate" data-productid="23458">
-                                <a href="javascript:;"><s></s></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                            <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                        </a>
-                        <p class="g-name">
-                            <a href="https://m.1yyg.com/v44/products/23458.do">(第<i>368671</i>潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                        </p>
-                        <ins class="gray9">价值:￥7130</ins>
-                        <div class="btn-wrap">
-                            <div class="Progress-bar">
-                                <p class="u-progress">
-                                    <span class="pgbar" style="width:1%;">
-                                        <span class="pging"></span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="gRate" data-productid="23458">
-                                <a href="javascript:;"><s></s></a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="https://m.1yyg.com/v44/products/23458.do" class="g-pic">
-                            <img src="https://img.1yyg.net/goodspic/pic-200-200/20160908092215288.jpg" width="136" height="136">
-                        </a>
-                        <p class="g-name">
-                            <a href="https://m.1yyg.com/v44/products/23458.do">(第368671潮)苹果（Apple）iPhone 7 Plus 128G版 4G手机</a>
-                        </p>
-                        <ins class="gray9">价值:￥7130</ins>
-                        <div class="btn-wrap">
-                            <div class="Progress-bar">
-                                <p class="u-progress">
-                                    <span class="pgbar" style="width:1%;">
-                                        <span class="pging"></span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class="gRate" data-productid="23458">
-                                <a href="javascript:;"><s></s></a>
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -328,8 +267,24 @@
                     ,'json'
                 )
             })
-
             //去结算
+            $('#go_payment').click(function(){
+                var _li=$("s[class='xuan current']").parent('li');
+                // console.log(_li);
+                var goods_id='';
+                _li.each(function(index){
+                    goods_id+=$(this).attr('goods_id')+',';
+                })
+                // console.log(goods_id);
+                $.post(
+                    "sid",
+                    {goods_id:goods_id,'_token':'{{csrf_token()}}'},
+                    function(res){
+                        layer.msg('请稍等');
+                    }
+                )
+            })
+
         })
     })
 </script>

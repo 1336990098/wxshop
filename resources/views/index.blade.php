@@ -238,6 +238,7 @@
 		    layui.use(['form','layer'],function(){
 		        var form = layui.form;
 		        var layer = layui.layer;
+		        //加入购物车
                 $(document).on('click','.cart',function(){
                     // alert(111);
 					var _this=$(this);
@@ -250,7 +251,7 @@
                         url:"cart/cart",
                         success:function(res){
                             if(res==7){
-                                alert('请先登录');
+                                layer.msg('请先登录');
                                 location.href = "{{url('login/login')}}";
 							}else{
                                 console.log(res);

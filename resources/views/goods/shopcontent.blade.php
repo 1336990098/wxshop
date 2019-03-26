@@ -23,33 +23,13 @@
                 <div class="hotimg-top"></div>
                 <section id="sliderBox" class="hotimg">
                     <ul class="slides" style="width: 600%; transition-duration: 0.5s; transform: translate3d(-828px, 0px, 0px);">
-                        <li style="width: 100px; float: left; display: block;" class="clone">
-                            <a href="http://weixin.1yyg.com/v27/products/23559.do?pf=weixin">
-                                <img src="/goodsimg/{{$goodsInfo['goods_img']}}" alt="">
-                            </a>
-                        </li>
-                        <li class="" style="width: 414px; float: left; display: block;">
-                            <a href="http://weixin.1yyg.com/v40/GoodsSearch.do?q=%E5%B0%8F%E7%B1%B36&amp;pf=weixin">
-                                <img src="{{url('images/messi1.gif')}}" alt="">
-                            </a>
-                        </li>
-                        <li style="width: 414px; float: left; display: block;" class="flex-active-slide">
-                            <a href="http://weixin.1yyg.com/v40/GoodsSearch.do?q=%E6%B8%85%E5%87%89%E4%B8%80%E5%A4%8F&amp;pf=weixin"><img src="{{url('images/messi2.gif')}}" alt="">
-                            </a>
-                        </li>
-                        <li style="width: 414px; float: left; display: block;" class="">
-                            <a href="http://weixin.1yyg.com/v40/GoodsSearch.do?q=%E6%96%B0%E9%B2%9C%E6%B0%B4%E6%9E%9C&amp;pf=weixin"><img  src="{{url('images/messi2.gif')}}" alt=""></a>
-                        </li>
-                        <li style="width: 414px; float: left; display: block;" class="">
-                            <a href="http://weixin.1yyg.com/v27/products/23559.do?pf=weixin">
-                                <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2559190924,2782704026&fm=11&gp=0.jpg" alt="">
-                            </a>
-                        </li>
+                        @foreach($goods_imgs as $v)
                         <li class="clone" style="width: 414px; float: left; display: block;">
                             <a href="http://weixin.1yyg.com/v40/GoodsSearch.do?q=%E5%B0%8F%E7%B1%B36&amp;pf=weixin">
-                                <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3493671719,2239707977&fm=26&gp=0.jpg" alt="">
+                                <img src="/goodsimgs/{{$v}}" style="height:300px;width:300px" alt="">
                             </a>
                         </li>
+                        @endforeach
                     </ul>
                 </section>
             </div>

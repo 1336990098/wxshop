@@ -1,56 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>地址管理</title>
-    <meta content="app-id=984819816" name="apple-itunes-app" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
-    <meta content="yes" name="apple-mobile-web-app-capable" />
-    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
-    <meta content="telephone=no" name="format-detection" />
-    <link href="css/comm.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="css/address.css">
-    <link rel="stylesheet" href="css/sm.css">
-  
-   
-    
-</head>
-<body>
-    
+@extends('master')
+@section('title')
+    慕希
+@endsection
+<link rel="stylesheet" href="{{url('css/address.css')}}">
+<link rel="stylesheet" href="{{url('css/sm.css')}}">
+
 <!--触屏版内页头部-->
 <div class="m-block-header" id="div-header">
     <strong id="m-title">地址管理</strong>
     <a href="javascript:history.back();" class="m-back-arrow"><i class="m-public-icon"></i></a>
-    <a href="/" class="m-index-icon">添加</a>
+    <a href="{{url('order/addressadd')}}" class="m-index-icon">添加</a>
 </div>
 <div class="addr-wrapp">
+
     <div class="addr-list">
+
          <ul>
+             @foreach($addressInfo as $v)
             <li class="clearfix">
-                <span class="fl">兰兰</span>
-                <span class="fr">15034008459</span>
+                <span class="fl">{{$v['address_name']}}</span>
+                <span class="fr">{{$v['address_tel']}}</span>
             </li>
             <li>
-                <p>北京市东城区起来我来了</p>
-            </li>
-            <li class="a-set">
-                <s class="z-set" style="margin-top: 6px;"></s>
-                <span>设为默认</span>
-                <div class="fr">
-                    <span class="edit">编辑</span>
-                    <span class="remove">删除</span>
-                </div>
-            </li>
-        </ul>  
-    </div>
-    <div class="addr-list">
-         <ul>
-            <li class="clearfix">
-                <span class="fl">兰兰</span>
-                <span class="fr">15034008459</span>
-            </li>
-            <li>
-                <p>北京市东城区起来我来了</p>
+                <p>{{$v['address_detail']}}</p>
             </li>
             <li class="a-set">
                 <s class="z-defalt" style="margin-top: 6px;"></s>
@@ -60,13 +32,16 @@
                     <span class="remove">删除</span>
                 </div>
             </li>
+            @endforeach
         </ul>  
     </div>
-   
+
 </div>
-<script src="js/zepto.js" charset="utf-8"></script>
-<script src="js/sm.js"></script>
-<script src="js/sm-extend.js"></script>
+@section('my-js')
+@endsection
+<script src="{{url('js/zepto.js')}}" charset="utf-8"></script>
+<script src="{{url('js/sm.js')}}"></script>
+<script src="{{url('js/sm-extend.js')}}"></script>
 <!-- 单选 -->
 <script>
     

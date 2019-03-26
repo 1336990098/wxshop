@@ -88,7 +88,7 @@
 
                         }else{
                             layer.msg('登陆成功');
-                            location.href = "{{url('/')}}";
+                            location.href = "{{url('cart/cartlist')}}";
                         }
                     }
                 )

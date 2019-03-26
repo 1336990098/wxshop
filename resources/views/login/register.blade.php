@@ -25,7 +25,7 @@
                     </dl>
                     <dl>
                         <s class="password"></s>
-                        <input  id="code" maxlength="4" value="" type="text" placeholder="请输入验证码" />
+                        <input  id="code" maxlength="4" value="" type="text" placeholder="请输入验证码1234" />
                         <button class="sendcode" id="btna">获取验证码</button>
                     </dl>
                     <dl>

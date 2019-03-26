@@ -28,6 +28,7 @@ Route::prefix('cart')->group(function(){
     route::any('changeNum','Index\CartController@changeNum');
     route::any('del','Index\CartController@del');
     route::any('delall','Index\CartController@delall');
+    route::any('sid','Index\OrderController@sid');
 });
 
 Route::prefix('login')->group(function(){
@@ -39,7 +40,8 @@ Route::prefix('login')->group(function(){
 
 Route::prefix('order')->group(function(){
     route::any('payment','Index\OrderController@payment');
-
+    route::any('address','Index\OrderController@address');
+    route::any('addressadd','Index\OrderController@addressadd');
 });
 
 

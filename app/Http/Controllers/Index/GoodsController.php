@@ -50,6 +50,10 @@ class GoodsController extends Controller
         $goods_id=$request->goods_id;
         $goodsInfo=Index::where('goods_id',$goods_id)->first();
 //        print_R($goodsInfo);die;
-        return view('goods/shopcontent',['goodsInfo'=>$goodsInfo]);
+        // 商品轮播图
+        $goods_imgs=$goodsInfo['goods_imgs'];
+        $goods_imgs=rtrim($goods_imgs,'|');
+        $goods_imgs=explode('|',$goods_imgs);
+        return view('goods/shopcontent',['goodsInfo'=>$goodsInfo,'goods_imgs'=>$goods_imgs]);
     }
 }

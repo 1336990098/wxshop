@@ -17,7 +17,15 @@ class IndexController extends Controller
     //我的潮购
     public function userpage()
     {
-        return view('userpage');
+        $user_id = session('user');
+
+        if(empty($user_id)){
+
+            return redirect('login/login');
+        }else{
+            return view('userpage');
+        }
+
     }
     //晒单
     public function share(){
