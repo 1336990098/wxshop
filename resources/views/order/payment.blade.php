@@ -109,9 +109,6 @@
             $('.chaomoney').css('background','#e2e2e2');
 
         }
-
-
-
         $('.net-pay a').click(function(){
             if($(this).hasClass('checked')){
 
@@ -199,8 +196,6 @@
             this.value = _val.replace(/\D/g,'');
         }
     });
-
-
     $('#btnPay').click(function(){
         layer.open({
             type: 1,

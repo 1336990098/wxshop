@@ -42,6 +42,9 @@ Route::prefix('order')->group(function(){
     route::any('payment','Index\OrderController@payment');
     route::any('address','Index\OrderController@address');
     route::any('addressadd','Index\OrderController@addressadd');
+    route::any('addressadddo','Index\OrderController@addressadddo');
+    route::any('getarea','Index\OrderController@getArea');
+    route::any('addressdel','Index\OrderController@addressdel');
 });
 
 
@@ -50,3 +53,9 @@ route::any('verify/creates','CaptchaController@creates');
 route::any('sendcode','Index\Login@sendcode');
 
 route::any('test','Index\CartController@test');
+
+route::prefix('alipay')->group(function(){
+    route::get('mobilepay',"AliPayController@mobilepay");
+    route::any('return',"AliPayController@re");
+    route::any('notify',"AliPayController@notify");
+});

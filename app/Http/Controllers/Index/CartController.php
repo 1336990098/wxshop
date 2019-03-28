@@ -37,13 +37,14 @@ class CartController extends Common
                 'user_id'=>$user_id,
                 'goods_id'=>$goods_id,
                 'buy_number'=>$arr['buy_number']+$buy_number,
+                'cart_status'=>1
             ];
             $ins=Cart::insert($data);
         } else{
             //有 执行累加(修改)
-
             $updateInfo=[
-                'buy_number'=>$arr['buy_number']+$buy_number
+                'buy_number'=>$arr['buy_number']+$buy_number,
+                'cart_status'=>1
             ];
             $add=Cart::where($where)->update($updateInfo);
         }
@@ -100,7 +101,7 @@ class CartController extends Common
         $where=[
             'goods_id'=>$goods_id
         ];
-        $res=Cart::where($where)->update(['cart_status'=>'2']);
+        $res=Cart::where($where)->update(['cart_status'=>'2','buy_number'=>0]);
         if($res){
             $this->successly('删除成功');
         }else{
@@ -115,7 +116,7 @@ class CartController extends Common
         $cart_id=rtrim($cart_id,',');
         $cart_id=explode(',',$cart_id);
 //        print_r($cart_id);die;
-        $res=Cart::whereIn('cart_id',$cart_id)->delete();
+        $res=Cart::whereIn('cart_id',$cart_id)->update(['cart_status'=>2,'buy_number'=>0]);
         if($res){
             $this->successly('删除成功');
         }else{
