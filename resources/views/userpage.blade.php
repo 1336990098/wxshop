@@ -23,6 +23,10 @@
             <a href="{{url('login/login')}}" class="orange">登录</a>
             <a href="{{url('login/register')}}" class="orange">注册</a>
         </div>
+        <div class="welcome" style="display: block">
+            <a href="{{url('login/loginout')}}" class="orange">退出账号</a>
+            <a href="{{url('login/loginoption')}}" class="orange">切换账号</a>
+        </div>
     <?php }?>
 
     <div class="welcome">

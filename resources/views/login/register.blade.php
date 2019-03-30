@@ -57,6 +57,9 @@
 @section('my-js')
 <script>
     $(function(){
+    layui.use(['form','layer'],function(){
+        var form=layui.form;
+        var layer=layui.layer;
         $('#btna').click(function(){
             var u_name=$('#userMobile').val();
             $.post(
@@ -77,7 +80,6 @@
                     if(res==2){
                         alert('手机号已存在');
                         location.href = "{{url('login/register')}}";
-
                     }
                     // console.log(res);
                 }
@@ -206,44 +208,39 @@
             }else if($('.conpwd').val()==''){
                 layer.msg('请您再次输入密码！');
             }else{
-                layui.use(['form','layer'],function(){
-                    var form=layui.form;
-                    var layer=layui.layer;
-                    var tel=$('#userMobile').val();
-                    var pwd1=$('#pwd1').val();
-                    var pwd2=$('#pwd2').val();
-                    var code=$('#code').val();
-                    // console.log(code);
-                    $.ajax({
-                        url:"{{url('login/registerdo')}}",
-                        type:'post',
-                        data:{'user_tel':tel,'pwd2':pwd2,'user_code':code,'user_pwd':pwd1,'_token': $('input[name=_token]').val()},
-                        success: function(res){
-                            // console.log(res);
-                            if(res==1){
-                                alert('注册成功');
-                                location.href = "{{url('cart/cartlist')}}";
-                            }else if(res==8){
-                                alert('注册失败');
-                                location.href = "{{url('login/register')}}";
-                            }else if(res==2){
-                                layer.msg('账号已存在');
-                                location.href = "{{url('login/register')}}";
-                            }else if(res==4){
-                                alert('验证码错误');
-                                location.href = "{{url('login/register')}}";
-                            }else if(res==5){
-                                alert('两次密码不一致');
-                                location.href = "{{url('login/register')}}";
-                            }
+                var tel=$('#userMobile').val();
+                var pwd1=$('#pwd1').val();
+                var pwd2=$('#pwd2').val();
+                // console.log(pwd2);
+                var code=$('#code').val();
+                // console.log(code);
+                $.ajax({
+                    url:"{{url('login/registerdo')}}",
+                    type:'post',
+                    data:{'user_tel':tel,'pwd2':pwd2,'user_code':code,'user_pwd':pwd1,'_token': $('input[name=_token]').val()},
+                    success: function(res){
+                        // console.log(res);
+                        if(res==1){
+                            alert('注册成功');
+                            location.href = "{{url('cart/cartlist')}}";
+                        }else if(res==8){
+                            alert('注册失败');
+                            location.href = "{{url('login/register')}}";
+                        }else if(res==2){
+                            layer.msg('账号已存在');
+                            location.href = "{{url('login/register')}}";
+                        }else if(res==4){
+                            alert('验证码错误');
+                            location.href = "{{url('login/register')}}";
+                        }else if(res==5){
+                            alert('两次密码不一致');
+                            location.href = "{{url('login/register')}}";
                         }
-                    })
-
-                });
+                    }
+                })
             }
-        })
-
-
+            })
+        });
     })
 </script>
 

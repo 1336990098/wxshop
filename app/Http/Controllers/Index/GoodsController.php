@@ -15,8 +15,12 @@ class GoodsController extends Controller
     public function goodslist(Request $request)
     {
         $cate_id=$request->cate_id;
-        $goodsInfo=Index::get();
+        $where=[
+            'is_up'=>1
+        ];
+        $goodsInfo=Index::where($where)->get();
         $cateInfo=Category::where(['pid'=>0])->get();
+
         // dd($category);exit;
         return view('goods/goodslist',['goodsInfo'=>$goodsInfo,'cateInfo'=>$cateInfo]);
     }
@@ -39,8 +43,6 @@ class GoodsController extends Controller
         return view('goods/div',['goods'=>$goods,'cateInfo'=>$cateInfo]);
     }
 
-
-
     /*
      *@content 商品详情
      * @params $request mixed
@@ -55,5 +57,13 @@ class GoodsController extends Controller
         $goods_imgs=rtrim($goods_imgs,'|');
         $goods_imgs=explode('|',$goods_imgs);
         return view('goods/shopcontent',['goodsInfo'=>$goodsInfo,'goods_imgs'=>$goods_imgs]);
+    }
+
+    public function bestnew(){
+        $where=[
+            'is_up'=>1
+        ];
+        $newdata=Index::where($where)->orderBy('create_time','desc')->get();
+        return view('goods/new',['newdata'=>$newdata]);
     }
 }

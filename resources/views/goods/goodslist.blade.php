@@ -71,7 +71,7 @@
                     <ul class="good-menu-list" id="ulOrderBy">
                         <li orderflag="10" class="current"><a href="javascript:;">即将揭晓</a></li>
                         <li orderflag="20"><a href="javascript:;">人气</a></li>
-                        <li orderflag="50"><a href="javascript:;">最新</a></li>
+                        <li orderflag="50"><a href="javascript:;" id="bestnew">最新</a></li>
                         <li orderflag="30"><a href="javascript:;">价值</a><span class="i-wrap"><i class="up"></i><i class="down"></i></span></li>
                         <!--价值(由高到低30,由低到高31)-->
                     </ul>
@@ -153,6 +153,16 @@
         })
         $(this).addClass('current').siblings('li').removeClass('current');
     })
+    $('#ulOrderBy').click(function(){
+        $.post(
+            'bestnew',
+            {'_token':'{{csrf_token()}}'},
+            function(res){
+                // console.log(res);
+                $('.good-list-inner').html(res);
+            }
+        )
+    });
 </script>
 <script>
     mui.init({

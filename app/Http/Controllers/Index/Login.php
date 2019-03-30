@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\LoginModel;
 use App\Model\User;
+use Illuminate\Support\Facades\Cache;
+use App\Model\Index;
+use Illuminate\Support\Facades\Redis;
 
 class Login extends Controller
 {
@@ -91,6 +94,17 @@ class Login extends Controller
         return view('login/userpage');
     }
 
+    //退出
+    public function loginout(Request $request){
+        $request->session()->forget('user');
+        return redirect('login/login');
+    }
+
+    //切换账号
+    public function loginoption(Request $request){
+        $request->session()->forget('user');
+        return redirect('login/login');
+    }
     //传手机号
     public function sendcode(Request $request){
 //        echo 1;die;
@@ -141,6 +155,35 @@ class Login extends Controller
 //        }
 //        return curl_exec($curl);
 //    }
+
+
+    public function test(Request $request)
+    {
+        $page=$request->input('page',1);
+        $search=$request->search;
+        /**memcache*/
+        if(Cache::has($search.$page)){
+            echo 1111;
+            $goods=Cache::get($search.$page);
+        }else{
+            echo 222;
+            $goods=Index::where('goods_name','like',"%$search%")->paginate(5);
+            Cache::put($search.$page,$goods,10);
+
+        }
+        /**Redis*/
+//        if(Redis::exists($page.$search)){
+//            $goods = unserialize(Redis::get($page.$search));
+//            echo 111;
+//        }else{
+//            echo 222;
+//            $goods = Index::where('goods_name','like',"%$search%")->paginate(5);
+//            Redis::set($page.$search,serialize($goods));
+//            Redis::expire($page.$search,100);
+//        }
+        return view('login/test',['goodsInfo'=>$goods,'search'=>$search]);
+
+    }
 
 
 }

@@ -19,6 +19,8 @@ Route::prefix('goods')->group(function () {
     route::any('goodslist','Index\GoodsController@goodslist');
     route::any('shopcontent','Index\GoodsController@shopcontent');
     route::any('category','Index\GoodsController@category');
+    route::any('bestnew','Index\GoodsController@bestnew');
+//    route::any('category','Index\GoodsController@category');
 
 });
 
@@ -36,6 +38,9 @@ Route::prefix('login')->group(function(){
     route::any('logindo','Index\Login@logindo');
     route::any('register','Index\Login@register');
     route::any('registerdo','Index\Login@registerdo');
+    route::any('test','Index\Login@test');
+    route::any('loginout','Index\Login@loginout');
+    route::any('loginoption','Index\Login@loginoption');
 });
 
 Route::prefix('order')->group(function(){
@@ -59,3 +64,4 @@ route::prefix('alipay')->group(function(){
     route::any('return',"AliPayController@re");
     route::any('notify',"AliPayController@notify");
 });
+
