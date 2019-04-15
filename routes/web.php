@@ -65,3 +65,24 @@ route::prefix('alipay')->group(function(){
     route::any('notify',"AliPayController@notify");
 });
 
+//微信绑定服务器
+route::any('/wechat/check',"Wechat\\WechatController@check");
+
+route::get('/material/up',"Wechat\\MaterialController@index");
+route::post('/material/doup',"Wechat\\MaterialController@uploadFile");
+
+
+route::prefix('admin')->group(function(){
+    route::any('index',"Admin\\WechatAdminController@index");
+    route::any('upform',"Admin\\WechatAdminController@upform");
+    route::post('upformdo',"Admin\\WechatAdminController@upformdo");
+    route::any('welcome',"Admin\\WechatAdminController@welcome");
+    route::get('wxtype',"Admin\\WechatAdminController@wxtype");
+    route::get('type',"Admin\\WechatAdminController@type");
+    route::post('wxtypedo',"Admin\\WechatAdminController@wxtypedo");
+    route::any('menulist',"Admin\\MenuController@getMenuList");
+});
+
+
+
+route::any('test',"Admin\\WechatAdminController@test");
